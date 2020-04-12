@@ -13,6 +13,7 @@ const app         = express();
 const http        = require('http').Server(app);
 const sessionStore= new session.MemoryStore();
 const io					= require("socket.io")(http);
+const passportSocketIo = require("passport.socketio");
 
 const cors = require('cors');
 app.use(cors());
