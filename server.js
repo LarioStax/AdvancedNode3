@@ -45,17 +45,24 @@ mongo.connect(process.env.DATABASE, (err, db) => {
 
   
     //start socket.io code  
+    io.use(passportSocketIo.authorize({
+    	cookieParser: cookieParser,
+    	key: "express.sid",
+    	secret: process.env.SESSION_SECRET,
+    	store: sessionStore
+    }));
+
 
     let currentUsers = 0;
 
     io.on("connection", socket => {
     	++currentUsers;
-    	console.log("A user has connected!");
+    	console.log("User " + socket.request.user.name + " connected!");
     	io.emit("user count", currentUsers)
 
     	socket.on("disconnect", function() {
 	    	--currentUsers;
-	    	console.log("A user has disconnected!");
+	    	console.log("User " + socket.request.user.name + " disconnected!");
 	    	io.emit("user count", currentUsers);
 	    });
     });
