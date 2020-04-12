@@ -4,7 +4,7 @@ $( document ).ready(function() {
   let socket = io();
 
   socket.on("user", function(data) {
-  	$("#num-users").text(data.currentUser + " users online");
+  	$("#num-users").text(data.currentUsers + " users online");
   	let message = data.name;
   	if (data.connected) {
   		message += " has joined the chat.";
