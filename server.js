@@ -12,6 +12,7 @@ const cookieParser= require('cookie-parser')
 const app         = express();
 const http        = require('http').Server(app);
 const sessionStore= new session.MemoryStore();
+const io					= require("socket.io")(http);
 
 
 fccTesting(app); //For FCC testing purposes
